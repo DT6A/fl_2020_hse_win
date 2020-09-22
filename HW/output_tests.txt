@@ -1,0 +1,63 @@
+RegexpType.ALT <regexp.Epsilon object at 0x0353A6B8> <regexp.Char object at 0x03418160>
+Time: 0.0000000 String len:      0 RE: \epsilon
+Time: 0.0000000 String len:      1 RE: \epsilon
+Time: 0.3169067 String len:    250 RE: a*a
+Time: 0.3092182 String len:    251 RE: a*a
+Time: 0.0079787 String len:     50 RE: (a|a)*
+Time: 0.0079825 String len:     51 RE: (a|a)*
+Time: 0.0000000 String len:      0 RE: a?
+Time: 0.0000000 String len:      1 RE: a?
+Time: 0.0000000 String len:      1 RE: a?
+Time: 0.0000000 String len:      1 RE: b | (c (a|b)*)
+Time: 0.0000000 String len:      1 RE: b | (c (a|b)*)
+Time: 0.0000000 String len:      1 RE: b | (c (a|b)*)
+Time: 0.0000000 String len:      2 RE: b | (c (a|b)*)
+Time: 0.0000000 String len:      4 RE: b | (c (a|b)*)
+Time: 0.0448794 String len:    101 RE: b | (c (a|b)*)
+Time: 0.1796362 String len:    201 RE: b | (c (a|b)*)
+Time: 0.7719014 String len:    401 RE: b | (c (a|b)*)
+Time: 0.0003979 String len:      5 RE: b | (c (a|b)*)
+Time: 0.1525626 String len:   3125 RE: b | (c (a|b)*)
+Time: 0.1423497 String len:     50 RE: (a|a)*a(a|a)*
+Time: 0.1476099 String len:     51 RE: (a|a)*a(a|a)*
+Time: 0.0009983 String len:      1 RE: (a|a)*a(a|a)*
+Time: 0.0000000 String len:      0 RE: (a|a)*a(a|a)*
+
+String length dependency
+Time: 0.0029907 String len:     25 RE: a*a
+Time: 0.0189853 String len:     25 RE: (a|a)*a(a|a)*
+Time: 0.0124345 String len:     50 RE: a*a
+Time: 0.1250508 String len:     50 RE: (a|a)*a(a|a)*
+Time: 0.0259318 String len:     75 RE: a*a
+Time: 0.4511311 String len:     75 RE: (a|a)*a(a|a)*
+Time: 0.0480807 String len:    100 RE: a*a
+Time: 1.0977919 String len:    100 RE: (a|a)*a(a|a)*
+Time: 0.0737996 String len:    125 RE: a*a
+Time: 2.1681125 String len:    125 RE: (a|a)*a(a|a)*
+Time: 0.1074033 String len:    150 RE: a*a
+Time: 3.9659348 String len:    150 RE: (a|a)*a(a|a)*
+
+String length dependency 2
+Time: 0.0179350 String len:     51 RE: (a|b)*a
+Time: 0.1332114 String len:     51 RE: (a|b)*a(a|b)*
+Time: 0.0727644 String len:    101 RE: (a|b)*a
+Time: 0.9743493 String len:    101 RE: (a|b)*a(a|b)*
+Time: 0.1831882 String len:    151 RE: (a|b)*a
+Time: 3.3446248 String len:    151 RE: (a|b)*a(a|b)*
+
+Complexity dependency
+Time: 0.0299191 String len:    100 RE: a*
+Time: 0.0429375 String len:    100 RE: (a|b)*
+Time: 0.0635557 String len:    100 RE: (a|b|c)*
+Time: 0.0607946 String len:    150 RE: a*
+Time: 0.1017280 String len:    150 RE: (a|b)*
+Time: 0.1536469 String len:    150 RE: (a|b|c)*
+Time: 0.1007323 String len:    200 RE: a*
+Time: 0.1914427 String len:    200 RE: (a|b)*
+Time: 0.2651582 String len:    200 RE: (a|b|c)*
+Time: 0.1552684 String len:    250 RE: a*
+Time: 0.2819557 String len:    250 RE: (a|b)*
+Time: 0.4272773 String len:    250 RE: (a|b|c)*
+Time: 0.2538552 String len:    300 RE: a*
+Time: 0.4119604 String len:    300 RE: (a|b)*
+Time: 0.6120884 String len:    300 RE: (a|b|c)*
