@@ -36,11 +36,11 @@ r3 = Alt(b, Seq(c, Star(Alt(a, b))))
 # (a|a)*a(a|a)*
 r4 = Seq(Seq(Star(Alt(a, a)), a), Star(Alt(a, a)))
 
-# (a|b)*a
-r5 = Seq(Star(Alt(a, b)), a)
+# (a|b)*(a|b)
+r5 = Seq(Star(Alt(a, b)), Alt(a, b))
 
-# (a|b)*ab(a|b)*
-r6 = Seq(Seq(Star(Alt(a, b)), a), Star(Alt(a, b)))
+# (a|b)*(a|b)(a|b)*
+r6 = Seq(Seq(Star(Alt(a, b)), Alt(a, b)), Star(Alt(a, b)))
 
 # a*
 r7 = Star(a)
@@ -53,7 +53,7 @@ r9 = Star(Alt(a, Alt(b, c)))
 
 # a?
 r10 = Alt(a, Epsilon())
-print(r10.type, r10.p, r10.q)
+
 
 profile_test(r0, '', '\epsilon', True)
 profile_test(r0, 'a', '\epsilon', False)
@@ -86,8 +86,8 @@ for sl in range(25, 151, 25):
 
 print('\nString length dependency 2')
 for sl in range(25, 76, 25):
-    profile_test(r5, 'ab' * sl + 'a', '(a|b)*a', True)
-    profile_test(r6, 'ab' * sl + 'a', '(a|b)*a(a|b)*', True)
+    profile_test(r5, 'ab' * sl, '(a|b)*(a|b)', True)
+    profile_test(r6, 'ab' * sl, '(a|b)*(a|b)(a|b)*', True)
 
 print('\nComplexity dependency')
 for sl in range(50, 151, 25):
