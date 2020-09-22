@@ -1,9 +1,10 @@
+Correctness tests
 Time: 0.0000000 String len:      0 RE: \epsilon
 Time: 0.0000000 String len:      1 RE: \epsilon
-Time: 0.3123436 String len:    250 RE: a*a
-Time: 0.3234172 String len:    251 RE: a*a
-Time: 0.0069814 String len:     50 RE: (a|a)*
-Time: 0.0069792 String len:     51 RE: (a|a)*
+Time: 0.3898876 String len:    250 RE: a*a
+Time: 0.3741465 String len:    251 RE: a*a
+Time: 0.0059915 String len:     50 RE: (a|a)*
+Time: 0.0059826 String len:     51 RE: (a|a)*
 Time: 0.0000000 String len:      0 RE: a?
 Time: 0.0000000 String len:      1 RE: a?
 Time: 0.0000000 String len:      1 RE: a?
@@ -12,51 +13,68 @@ Time: 0.0000000 String len:      1 RE: b | (c (a|b)*)
 Time: 0.0000000 String len:      1 RE: b | (c (a|b)*)
 Time: 0.0000000 String len:      2 RE: b | (c (a|b)*)
 Time: 0.0000000 String len:      4 RE: b | (c (a|b)*)
-Time: 0.0518627 String len:    101 RE: b | (c (a|b)*)
-Time: 0.1752830 String len:    201 RE: b | (c (a|b)*)
-Time: 0.8463485 String len:    401 RE: b | (c (a|b)*)
+Time: 0.0523868 String len:    101 RE: b | (c (a|b)*)
+Time: 0.2176945 String len:    201 RE: b | (c (a|b)*)
+Time: 0.8444228 String len:    401 RE: b | (c (a|b)*)
 Time: 0.0000000 String len:      5 RE: b | (c (a|b)*)
-Time: 0.1670465 String len:   3125 RE: b | (c (a|b)*)
-Time: 0.1300497 String len:     50 RE: (a|a)*a(a|a)*
-Time: 0.1450739 String len:     51 RE: (a|a)*a(a|a)*
+Time: 0.1694493 String len:   3125 RE: b | (c (a|b)*)
+Time: 0.1552515 String len:     50 RE: (a|a)*a(a|a)*
+Time: 0.1466682 String len:     51 RE: (a|a)*a(a|a)*
 Time: 0.0000000 String len:      1 RE: (a|a)*a(a|a)*
 Time: 0.0000000 String len:      0 RE: (a|a)*a(a|a)*
 
-String length dependency
-Time: 0.0032251 String len:     25 RE: a*a
-Time: 0.0187109 String len:     25 RE: (a|a)*a(a|a)*
-Time: 0.0139704 String len:     50 RE: a*a
-Time: 0.1637516 String len:     50 RE: (a|a)*a(a|a)*
-Time: 0.0249693 String len:     75 RE: a*a
-Time: 0.4730260 String len:     75 RE: (a|a)*a(a|a)*
-Time: 0.0465310 String len:    100 RE: a*a
-Time: 1.1056273 String len:    100 RE: (a|a)*a(a|a)*
-Time: 0.0768311 String len:    125 RE: a*a
-Time: 2.2139566 String len:    125 RE: (a|a)*a(a|a)*
-Time: 0.1126397 String len:    150 RE: a*a
-Time: 4.0910933 String len:    150 RE: (a|a)*a(a|a)*
+Complexity length dependency
+Time: 0.0029914 String len:     25 RE: a*a
+Time: 0.0179906 String len:     25 RE: (a|a)*a(a|a)*
+Time: 0.0129669 String len:     50 RE: a*a
+Time: 0.1562831 String len:     50 RE: (a|a)*a(a|a)*
+Time: 0.0269287 String len:     75 RE: a*a
+Time: 0.4968207 String len:     75 RE: (a|a)*a(a|a)*
+Time: 0.0498302 String len:    100 RE: a*a
+Time: 1.1843507 String len:    100 RE: (a|a)*a(a|a)*
+Time: 0.0953753 String len:    125 RE: a*a
+Time: 2.3119550 String len:    125 RE: (a|a)*a(a|a)*
+Time: 0.1082573 String len:    150 RE: a*a
+Time: 4.1298904 String len:    150 RE: (a|a)*a(a|a)*
 
-String length dependency 2
-Time: 0.0218868 String len:     50 RE: (a|b)*(a|b)
-Time: 0.2434075 String len:     50 RE: (a|b)*(a|b)(a|b)*
-Time: 0.0857172 String len:    100 RE: (a|b)*(a|b)
-Time: 2.1058803 String len:    100 RE: (a|b)*(a|b)(a|b)*
-Time: 0.1941915 String len:    150 RE: (a|b)*(a|b)
-Time: 8.3772657 String len:    150 RE: (a|b)*(a|b)(a|b)*
+Complexity length dependency 2
+Time: 0.0293794 String len:     50 RE: (a|b)*(a|b)
+Time: 0.2515945 String len:     50 RE: (a|b)*(a|b)(a|b)*
+Time: 0.0987005 String len:    100 RE: (a|b)*(a|b)
+Time: 2.1026213 String len:    100 RE: (a|b)*(a|b)(a|b)*
+Time: 0.2126019 String len:    150 RE: (a|b)*(a|b)
+Time: 7.4935234 String len:    150 RE: (a|b)*(a|b)(a|b)*
 
-Complexity dependency
-Time: 0.0259802 String len:    100 RE: a*
-Time: 0.0548534 String len:    100 RE: (a|b)*
-Time: 0.0817816 String len:    100 RE: (a|b|c)*
-Time: 0.0693221 String len:    150 RE: a*
-Time: 0.1286557 String len:    150 RE: (a|b)*
-Time: 0.1815991 String len:    150 RE: (a|b|c)*
-Time: 0.1116157 String len:    200 RE: a*
-Time: 0.2433493 String len:    200 RE: (a|b)*
-Time: 0.3650198 String len:    200 RE: (a|b|c)*
-Time: 0.1885481 String len:    250 RE: a*
-Time: 0.2883191 String len:    250 RE: (a|b)*
-Time: 0.4072151 String len:    250 RE: (a|b|c)*
-Time: 0.2313817 String len:    300 RE: a*
-Time: 0.4113848 String len:    300 RE: (a|b)*
-Time: 0.6475170 String len:    300 RE: (a|b|c)*
+ALT complexity dependency
+Time: 0.0288899 String len:    100 RE: a*
+Time: 0.0478361 String len:    100 RE: (a|b)*
+Time: 0.0747986 String len:    100 RE: (a|b|c)*
+Time: 0.0748048 String len:    150 RE: a*
+Time: 0.1311820 String len:    150 RE: (a|b)*
+Time: 0.1666234 String len:    150 RE: (a|b|c)*
+Time: 0.1141400 String len:    200 RE: a*
+Time: 0.2212048 String len:    200 RE: (a|b)*
+Time: 0.2930996 String len:    200 RE: (a|b|c)*
+Time: 0.1949878 String len:    250 RE: a*
+Time: 0.3716824 String len:    250 RE: (a|b)*
+Time: 0.4573905 String len:    250 RE: (a|b|c)*
+Time: 0.2654524 String len:    300 RE: a*
+Time: 0.4964192 String len:    300 RE: (a|b)*
+Time: 0.7146599 String len:    300 RE: (a|b|c)*
+
+SEQ complexity dependency
+Time: 0.0149574 String len:     75 RE: a*
+Time: 0.0169561 String len:     74 RE: (ab)*
+Time: 0.0199511 String len:     75 RE: (abc)*
+Time: 0.0609009 String len:    150 RE: a*
+Time: 0.0728071 String len:    150 RE: (ab)*
+Time: 0.0927098 String len:    150 RE: (abc)*
+Time: 0.1481030 String len:    225 RE: a*
+Time: 0.1696393 String len:    224 RE: (ab)*
+Time: 0.2129107 String len:    225 RE: (abc)*
+Time: 0.2997782 String len:    300 RE: a*
+Time: 0.3356626 String len:    300 RE: (ab)*
+Time: 0.3265674 String len:    300 RE: (abc)*
+Time: 0.4545746 String len:    375 RE: a*
+Time: 0.4869015 String len:    374 RE: (ab)*
+Time: 0.5496945 String len:    375 RE: (abc)*
