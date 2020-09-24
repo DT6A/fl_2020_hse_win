@@ -45,7 +45,7 @@ class Regexp:
             else:
                 return Seq(self.p.derivative(char), self.q)
         else:
-            return Seq(self.p.derivative(char), Star(self.p))
+            return Seq(self.p.derivative(char), self)
 
     def match(self, s):
         r = self
