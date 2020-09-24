@@ -38,17 +38,14 @@ class Regexp:
         elif self.type == RegexpType.CHAR:
             return Regexp(RegexpType.EPSILON) if self.p == char else Regexp(RegexpType.EMPTY)
         elif self.type == RegexpType.ALT:
-            return Regexp(RegexpType.ALT, self.p.derivative(char), self.q.derivative(char))
+            return Alt(self.p.derivative(char), self.q.derivative(char))
         elif self.type == RegexpType.SEQ:
             if self.p.nullable():
-                return Regexp(
-                    RegexpType.ALT,
-                    Regexp(RegexpType.SEQ, self.p.derivative(char), self.q), self.q.derivative(char)
-                )
+                return Alt(Seq(self.p.derivative(char), self.q), self.q.derivative(char))
             else:
-                return Regexp(RegexpType.SEQ, self.p.derivative(char), self.q)
+                return Seq(self.p.derivative(char), self.q)
         else:
-            return Regexp(RegexpType.SEQ, self.p.derivative(char), Regexp(RegexpType.STAR, self.p))
+            return Seq(self.p.derivative(char), Star(self.p))
 
     def match(self, s):
         r = self

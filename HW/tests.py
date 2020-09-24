@@ -12,7 +12,7 @@ def profile_test(re, s, re_s, ca=None):
     if ca is not None:
         assert ca == res
     elapsed_time = time.time() - start_time
-    print("Time: %3.7f" % elapsed_time, "String len: %6i" % len(s), "RE:", re_s)
+    print("Time: %4.7f" % elapsed_time, "String len: %6i" % len(s), "RE:", re_s)
 
 
 a = Char('a')
@@ -74,7 +74,7 @@ profile_test(r10, '', 'a?', True)
 profile_test(r10, 'a', 'a?', True)
 profile_test(r10, 'b', 'a?', False)
 
-s_list = ["b", "c", "d", "ba", "aaaa", "c" + "abba" * 25, "c" + "abba" * 50, "c" + "abba" * 100]
+s_list = ["b", "c", "d", "ba", "aaaa", "c" + "abba" * 250, "c" + "abba" * 500, "c" + "abba" * 1000]
 for s in s_list:
     profile_test(r3, s, 'b | (c (a|b)*)')
 
@@ -86,24 +86,24 @@ profile_test(r4, 'a' * 50 + 'b', '(a|a)*a(a|a)*', False)
 profile_test(r4, 'a', '(a|a)*a(a|a)*', True)
 profile_test(r4, '', '(a|a)*a(a|a)*', False)
 
-print('\nComplexity length dependency')
-for sl in range(25, 151, 25):
+print('\nComplexity dependency')
+for sl in range(250, 1501, 250):
     profile_test(r1, 'a' * sl, 'a*a', True)
     profile_test(r4, 'a' * sl, '(a|a)*a(a|a)*', True)
 
-print('\nComplexity length dependency 2')
-for sl in range(25, 76, 25):
+print('\nComplexity dependency 2')
+for sl in range(250, 760, 250):
     profile_test(r5, 'ab' * sl, '(a|b)*(a|b)', True)
     profile_test(r6, 'ab' * sl, '(a|b)*(a|b)(a|b)*', True)
 
 print('\nALT complexity dependency')
-for sl in range(50, 151, 25):
+for sl in range(5000, 15001, 2500):
     profile_test(r7, 'aa' * sl, 'a*', True)
     profile_test(r8, 'aa' * sl, '(a|b)*', True)
     profile_test(r9, 'aa' * sl, '(a|b|c)*', True)
 
 print('\nSEQ complexity dependency')
-for sl in range(25, 126, 25):
+for sl in range(2500, 12600, 2500):
     profile_test(r7, 'a' * (sl * 3), 'a*', True)
     profile_test(r11, 'ab' * int(sl * 1.5), '(ab)*', True)
     profile_test(r12, 'abc' * sl, '(abc)*', True)
