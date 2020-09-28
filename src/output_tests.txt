@@ -1,0 +1,47 @@
+FILE: c_correct1
+Program is correct.
+(( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq (( f ) def (( g ) and (( h ) or ( t )))))))
+
+FILE: c_correct2
+Program is correct.
+(( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq ((( f ) def (( g ) and (( h ) or ( t )))) seq (( f ) seq ((( f ) def ( g )) seq ((( f ) def ((( g ) and ( h )) or ( t ))) seq (( f ) def (( g ) and (( h ) or ( t )))))))))))))))))))))))))))))))))))))))))))))))
+
+FILE: c_correct3
+Program is correct.
+((( f ) def ((( f ) and (( g ) and (( a ) and (( w ) and ( x ))))) or ((( d ) and ( a )) or ( w )))) seq ((( f ) def (((( f ) or (( s ) or (( s ) or (( b ) or ( d ))))) and (( g ) and ((( a ) or ((( s ) and ( f )) or (( a ) and (( l ) or (( s ) or (( f ) or ((( g ) and ( s )) or (( s ) or (( g ) or (( a ) and ( w ))))))))))) and (((( w ) and (( f ) or ( s ))) or ((( a ) and (( q ) and (( w ) and (( a ) and ( s ))))) or (( a ) and ( d )))) and ( x ))))) or ((( d ) and ( a )) or ( w )))) seq ((( f ) def (( a ) and (( f ) and (( s ) and (( s ) and (( w ) and (( f ) and (( s ) and (( g ) and (( p ) or ( a ))))))))))) seq (( f ) def (( a ) and (( f ) and (( s ) and (( s ) and (( w ) and (( f ) and (( s ) and (( g ) and (( p ) or ( a ))))))))))))))
+
+FILE: c_empty
+Empty file
+
+FILE: i_0
+Illegal character '%' at line 2 pos 15
+Program is incorrect. Illegal character(s) in input file.
+
+FILE: i_1
+Expected dot but got EOF after line 1 col 0
+Failed to parse
+
+FILE: i_2
+Expected id but got :- at line 1 col 0
+Failed to parse
+
+FILE: i_3
+Expected id or expression but got . at line 1 col 11
+Failed to parse
+
+FILE: i_4
+Expected closing bracket but got . at line 1 col 12
+Failed to parse
+
+FILE: i_5
+Expected id or expression but got :- at line 18 col 99
+Failed to parse
+
+FILE: i_6
+Expected id or expression but got ) at line 4 col 100
+Failed to parse
+
+FILE: i_7
+Expected closing bracket but got . at line 1 col 132
+Failed to parse
+
