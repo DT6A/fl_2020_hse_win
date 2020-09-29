@@ -33,7 +33,7 @@ class Parser:
             return True
         print("Expected closing bracket but got", t2w(self.current.type), "at line", self.current.lineno, "col", self.current.lexpos)
         raise ValueError()
-        #print("Unexpected token", self.current.type, "expected", tok)
+        print("Unexpected token", self.current.type, "expected", tok)
         return False
 
     def log_error(self, token, expected):
@@ -68,28 +68,43 @@ class Parser:
 
     def conj(self):
         l = self.expr()
+        if l == None:
+            return None
+        r = self.conj_()
+        return Node(l, r, 'and')
+
+    def conj_(self):
         if self.accept('AND'):
-            r = self.conj()
-            if r == None:
+            l = self.expr()
+            if l == None:
                 self.log_error(self.current, "expression")
                 return None
+            r = self.conj_()
             return Node(l, r, "and")
-        return l
+        return Node(None, None, 'eps')
 
     def disj(self):
         l = self.conj()
+        if l == None:
+            return None
+        r = self.disj_()
+        return Node(l, r, 'and')
+
+    def disj_(self):
         if self.accept('OR'):
-            r = self.disj()
-            if r == None:
-                self.log_error(self.current, "expression")
+            l = self.conj()
+            if l == None:
+                #self.log_error(self.current, "expression")
                 return None
-            return Node(l, r, "or")
-        return l
+            r = self.disj_()
+            return Node(l, r, "and")
+        return Node(None, None, 'eps')
 
     def R(self):
         l = self.id()
         if self.accept('CORK'):
             r = self.disj()
+            #print(self.current, r)
             if r == None:
                 return None
             if not self.accept('DELIM'):
@@ -118,6 +133,7 @@ def lexer(s):
     while True:
         yield '0'
 
+
 def pr(node):
     a = "("
     if node.left!=None:
@@ -127,6 +143,7 @@ def pr(node):
         a += pr(node.right)
     a+=')'
     return a
+
 
 def analyze_file(file_name):
     lexer.__eof_pos = None
