@@ -4,7 +4,8 @@ f :- g, h; t.
 f :- g, (h; t).
 f a :- g, h (t c d).
 f (cons h t) :- g h, f t.
-f (cons (h s (s e a s)) t) :- g h, f ((t s (w s w a w) r) d w (w d r a)).
+
+f (cons (h s (s e a s)) t) :- g h, f (t s (w s w a w) r d w (w d r a)).
 
 
 
@@ -19,8 +20,8 @@ g
 
 fabc :- gxyz.
 
-(a b c).
-(a b c) :- (b c a).
-(a (b c)) :- ((c d) a w).
+a (b c).
+a b c :- b (c a).
+a (b (c d)) :- x (w (c d) a w).
 
-f (cons (h s (s e a s)) t) :- g , h, f ; ((t s (w s w a w) r) d w (w d r a)) ; a ; (a ; (a ; a), b), b, b.
+f :- a, c, d, e, a; g; w, a, f, e; a.
