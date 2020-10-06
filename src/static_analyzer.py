@@ -164,3 +164,6 @@ def analyze_file(file_name):
     print("Program is correct.")
     print(pr(tree))
     return True
+
+if __name__ == '__main__':
+    analyze_file(sys.argv[1])
