@@ -24,4 +24,5 @@ a (b c).
 a b c :- b (c a).
 a (b (c d)) :- x (w (c d) a w).
 
-f :- a, c, d, e, a; g; w, a, f, e; a.
+a (b (c d)) :- ((x (w (c d) a w))).
+a (b (c d)) :- ((x (w (c d) a w))), (a ((a))).

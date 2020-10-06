@@ -72,8 +72,8 @@ def p_atom_tail(p):
 
 def p_tail(p):
   '''atomtail : atom
-              | OBR atom CBR
-              | OBR atom CBR atom
+              | OBR atomtail CBR
+              | OBR atomtail CBR atomtail
               '''
   if len(p) == 2:
     p[0] = p[1]
@@ -92,9 +92,24 @@ def p_error(p):
   raise ValueError("Syntax error")
 
 
-sys.stdout = open(sys.argv[1] + '.out', 'w')
 
 parser = yacc.yacc()
+
+'''
+while True:
+  try:
+    s = input("calc> ")
+  except EOFError:
+    break
+  if not s:
+    continue
+  try:
+    result=parser.parse(s)
+    print(pr(result))
+  except:
+    pass
+'''
+sys.stdout = open(sys.argv[1] + '.out', 'w')
 
 with open(sys.argv[1], 'r') as inf:
   try:
