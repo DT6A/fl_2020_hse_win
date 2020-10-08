@@ -68,37 +68,23 @@ class Parser:
 
     def conj(self):
         l = self.expr()
-        if l == None:
-            return None
-        r = self.conj_()
-        return Node(l, r, 'and')
-
-    def conj_(self):
         if self.accept('AND'):
-            l = self.expr()
-            if l == None:
+            r = self.conj()
+            if r == None:
                 self.log_error(self.current, "expression")
                 return None
-            r = self.conj_()
             return Node(l, r, "and")
-        return Node(None, None, 'eps')
+        return l
 
     def disj(self):
         l = self.conj()
-        if l == None:
-            return None
-        r = self.disj_()
-        return Node(l, r, 'and')
-
-    def disj_(self):
         if self.accept('OR'):
-            l = self.conj()
-            if l == None:
-                #self.log_error(self.current, "expression")
+            r = self.disj()
+            if r == None:
+                self.log_error(self.current, "expression")
                 return None
-            r = self.disj_()
-            return Node(l, r, "and")
-        return Node(None, None, 'eps')
+            return Node(l, r, "or")
+        return l
 
     def R(self):
         l = self.id()
