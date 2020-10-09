@@ -12,6 +12,8 @@ class Node:
 
 
 def pr(node):
+  #if type(node) == str:
+    #return node
   a = node.name
   if node.name == "DEF":
     a = '\n' + a
@@ -66,23 +68,34 @@ def p_atom_id(p):
   'atom : ID'
   p[0] = Node(None, None, 'ID ' + p[1])
 
-def p_atom_tail(p):
-  'atom : ID atomtail'
+def p_atom_atom(p):
+  'atom : ID atom'
   p[0] = Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOM')
 
-def p_tail(p):
-  '''atomtail : atom
-              | OBR atomtail CBR
-              | OBR atomtail CBR atomtail
-              '''
-  if len(p) == 2:
-    p[0] = p[1]
-  elif len(p) == 4:
-    p[0] = p[2]
-  elif len(p) == 5:
-    p[0] = Node(p[2], p[4], 'ATOM')
-  else:
-    pass
+def p_atom_tail(p):
+  'atom : ID atomproxy'
+  p[0] = Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOM')
+
+def p_atom_tail_tail(p):
+  'atom : ID atomproxy atom'
+  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOM'), p[3], 'ATOM')
+
+def p_atom_tail_proxy(p):
+  'atom : ID atomproxy atomproxy'
+  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOM'), p[3], 'ATOM')
+
+def p_proxy_proxy(p):
+  'atomproxy : OBR atomproxy2 CBR'
+  p[0] = p[2]
+
+def p_proxy_atom(p):
+  'atomproxy2 : atom'
+  p[0] = p[1]
+
+def p_proxy_proxy2(p):
+  'atomproxy2 : OBR atomproxy2 CBR'
+  p[0] = p[2]
+
 
 def p_error(p):
   if p == None:
