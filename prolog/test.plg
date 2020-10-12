@@ -1,0 +1,62 @@
+f.
+f :- g.
+f :- g, h; t.
+f :- g, (h; t).
+f a :- g, h (t c d).
+f (cons h t) :- g h, f t.
+
+f (cons (h s (s e a s)) t) :- g h, f (t s (w s w a w) r d w (w d r a)).
+
+
+
+f :-		   g            	 .
+
+f
+ :-
+
+
+g
+.
+
+fabc :- gxyz.
+
+a (b c).
+a b c :- b (c a).
+a (b (c d)) :- x (w (c d) a w).
+
+a (b (c d)) :- ((x (w (c d) a w))).
+a (b (c d)) :- ((x (w (c d) a w))), (a ((a))).
+f :- (((b))), a ((b)).
+
+f. f. f. f.
+f f f :- (f, g, f); fff, (dd, f); f.
+
+f
+. f.
+f
+. g f (ffdfjsh) sdas sda :- d. f :-
+(g, g, g, ggg g g g); sdsada (sdasd) sdsad (sdasd); sfsdf, dfsdfsd (ssdf), (sdsf; sfs; fsdf; f)
+.
+
+f (((f))) :- f (ff f).
+
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff :- fffffffffffffffffffffffffffffffffffffffffffff hgfshfdg fshgdsjhgsjd sdhgsajd
+sdgh jhgdhsgajd gsjdhg ajshdg ajshgdj asgdja gjdgaj.
+
+f :- fffff fff, ffff, ffff, hello, my friend, how (are you) (what are you doing), h; shdshdg. f. f.
+
+f :- first, second; third, extra (hello ((world))) wot, he.
+
+
+f:-f.
+
+
+f :- f, (f, f, f); (f; (f; (f, g, f (ff) (ff)))).
+
+f:-fdsdsdsdssd, ddfd (
+sdasd (sads )
+).
+
+a (a) :- a.
+a (a (a) (a a)) :- ((((a)))).
+a :- aaa (aaa (aaa)) (aaaaa).

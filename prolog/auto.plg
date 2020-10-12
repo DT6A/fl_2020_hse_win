@@ -1,0 +1,12 @@
+module auto.
+
+transition A X A :- state A, makes0 X.
+transition A X B :-
+  state A, state B, makes1 X, next A B.
+transition B X A :-
+  state A, state B, makes2 X, next A B.
+
+runAuto Word :- initial S, runAux Word S.
+
+runAux nil S :- final S.
+runAux [H | T] S :- transition S H S1, runAux T S1.
