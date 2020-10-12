@@ -58,8 +58,9 @@ def t_newline(t):
 def t_error(t):
   t.value = t.value[0]
   update_lex_pos(t)
-  print("Illegal character '%s' at line %i pos %i. Ignored." % (t.value, t.lineno, t.lexpos - update_lex_pos.pos_subst))
+  print("Illegal character '%s' at line %i pos %i." % (t.value, t.lineno, t.lexpos - update_lex_pos.pos_subst))
   t.lexer.skip(1)
+  raise ValueError("")
   tokenize_file.no_errs = False
 
 
