@@ -26,7 +26,7 @@ def pr(node):
 
 def p_defs_seq(p):
   'seq : def DELIM seq'
-  p[0] = Node(p[1], p[3], 'SEQ')
+  p[0] = p[1] + '\n' + p[3]
 
 def p_seq_def(p):
   'seq : def DELIM'
@@ -34,15 +34,15 @@ def p_seq_def(p):
 
 def p_def_full(p):
   'def : atom CORK disj'
-  p[0] = Node(p[1], p[3], 'DEF')
+  p[0] = '(DEF (DHEAD (ATOM ' + p[1] + '))(DBODY ' + p[3] +'))'
 
 def p_def_head(p):
   'def : atom'
-  p[0] = Node(p[1], None, 'DEF')
+  p[0] = '(DEF (DHEAD (ATOM' + p[1] + ')))'
 
 def p_disj_disj(p):
   'disj : conj OR disj'
-  p[0] = Node(p[1], p[3], 'OR')
+  p[0] = '(OR ' + p[1] + p[3] + ')'
 
 def p_disj_conj(p):
   'disj : conj'
@@ -50,7 +50,7 @@ def p_disj_conj(p):
 
 def p_conj_conj(p):
   'conj : expr AND conj'
-  p[0] = Node(p[1], p[3], 'AND')
+  p[0] = '(AND ' + p[1] + p[3] + ')'
 
 def p_conj_atom(p):
   'conj : expr'
@@ -62,27 +62,27 @@ def p_expr_disj(p):
 
 def p_expr_atom(p):
   'expr : atom'
-  p[0] = p[1]
+  p[0] = '(ATOM ' + p[1] +')'
 
 def p_atom_id(p):
   'atom : ID'
-  p[0] = Node(None, None, 'ID ' + p[1])
+  p[0] = '(ID ' + p[1] + ')'
 
 def p_atom_atom(p):
   'atom : ID atom'
-  p[0] = Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOM')
+  p[0] = '(ID ' + p[1] + ')' + p[2]
 
 def p_atom_tail(p):
   'atom : ID atomproxy'
-  p[0] = Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOMSEQ')
+  p[0] = '(ID ' + p[1] + ')' + p[2]
 
 def p_atom_tail_tail(p):
   'atom : ID atomproxy atom'
-  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOMSEQ'), p[3], 'ATOMSEQ')
+  p[0] = '(ID ' + p[1] + ')' + p[2] + p[3]
 
 def p_atom_tail_proxy(p):
   'atom : ID atomproxy atomproxy'
-  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOMSEQ'), p[3], 'ATOMSEQ')
+  p[0] = '(ID ' + p[1] + ')' + p[2] + p[3]
 
 def p_proxy_proxy(p):
   'atomproxy : OBR atomproxy2 CBR'
@@ -90,12 +90,11 @@ def p_proxy_proxy(p):
 
 def p_proxy_atom(p):
   'atomproxy2 : atom'
-  p[0] = p[1]
+  p[0] = '(ATOM ' + p[1] + ')'
 
 def p_proxy_proxy2(p):
   'atomproxy2 : OBR atomproxy2 CBR'
   p[0] = p[2]
-
 
 def p_error(p):
   if p == None:
@@ -127,6 +126,6 @@ sys.stdout = open(sys.argv[1] + '.out', 'w')
 with open(sys.argv[1], 'r') as inf:
   try:
     result = parser.parse(inf.read())
-    print(pr(result))
+    print(result)
   except ValueError:
     pass
