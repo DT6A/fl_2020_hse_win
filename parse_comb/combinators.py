@@ -2,6 +2,18 @@ import sys
 
 from parsita import *
 
+def foldl(f, l, v):
+    res = v
+    l = l[::-1]
+    for i in l:
+        res = f(i, res)
+    return res
+
+def process_list(l, v):
+    res = l.rindex('nil')
+    l = l[:res] + v + l[res + 3:]
+    return l
+
 class PrologParser(TextParsers, whitespace=r'[ \t\n\r]*'):
     kw_module = lit('module') > (lambda x: '(MODULE ')
     kw_type = lit('type') > (lambda x: '(TYPE ')
@@ -25,17 +37,20 @@ class PrologParser(TextParsers, whitespace=r'[ \t\n\r]*'):
 
     l_atm1 = lambda x: ''.join(list(map(lambda y: str(y) if y != [] else '', x)))
     l_atm2 = lambda x: '(ATOM ' + ''.join(list(map(lambda y: str(y) if y != [] else '', x))) + ')'
-    l_atm3 = lambda x: ''.join(list(map(lambda y: str(y) if y != [] else '', x)))
+    l_atm3 = lambda x: '(' + ''.join(list(map(lambda y: str(y) if y != [] else '', x))) + ')'
     atom = (identif & (rep(atom_proxy| atom_proxy2) > l_atm1)) > l_atm2
-    atom_proxy = (atom | obr & atom_proxy & cbr) > l_atm3
+    atom_proxy = (atom | obr & atom_proxy & cbr) > l_atm1
     atom_proxy2 = (atom | (var | identif | list_comb) & (rep(atom_proxy2) > l_atm1)) > l_atm3
 
     type_seq = rep1sep(type_comb, arrow) > (lambda x: '(TYPESEQ ' + ''.join(x) + ')')
     type_comb = atom | var | obr & type_seq & cbr > (lambda x: ''.join(x))
     #type_comb2 = ((atom | var | obr & type_seq & cbr) & arrow & type_seq) > (lambda x: '(TYPESEQ ' + ''.join(x) + ')')
 
-    l_list = (lambda x: '[LIST ' + ''.join(x) + ']')
-    list_comb = (lob & ((((atom | var | list_comb) & list_ht & var) > l_list) | (repsep(atom | var | list_comb, list_sep) > l_list)) & lcb) > l_atm1
+    l_list = (lambda x: foldl(lambda y, z: '(cons ' + y + ' ' + z + ')', x, 'nil'))
+    l_short_list = (lambda x: '(cons (' + x[0] + ')' + x[2] + ')')
+    l_compl_list = (lambda x: process_list(x[0], x[2]))
+    list_coma = repsep(atom | var | list_comb, list_sep) > l_list
+    list_comb = (lob & ((((atom | var | list_comb) & list_ht & var) > l_short_list) | ((list_coma & list_ht & var)  > l_compl_list) | list_coma) & lcb) > l_atm1
 
     expr = (obr & disj & cbr | atom) > (lambda x: ''.join(x))
     conj = ((expr & conj_s & conj > (lambda x: '(AND ' + ''.join(x) + ')'))  | expr)
