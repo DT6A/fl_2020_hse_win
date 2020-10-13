@@ -77,6 +77,8 @@ def test_lists():
     assert type(parse_fn('[a (b c) | T]')) == Success
     assert type(parse_fn('[[X, [H | T]] | Z]')) == Success
     assert type(parse_fn('[[a], [b, c]]')) == Success
+    assert type(parse_fn('[[X, [H | T]], x | Z]')) == Success
+    assert type(parse_fn('[a, b, Z, [x, y | Z], [X, [H | T]], x | Z]')) == Success
     assert type(parse_fn2('g [X] Y')) == Success
 
     assert type(parse_fn('[')) == Failure
