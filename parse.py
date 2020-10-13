@@ -78,11 +78,11 @@ def p_atom_tail(p):
 
 def p_atom_tail_tail(p):
   'atom : ID atomproxy atom'
-  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOM'), p[3], 'ATOMSEQ')
+  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOMSEQ'), p[3], 'ATOMSEQ')
 
 def p_atom_tail_proxy(p):
   'atom : ID atomproxy atomproxy'
-  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOM'), p[3], 'ATOMSEQ')
+  p[0] = Node(Node(Node(None, None, 'ID ' + p[1]), p[2], 'ATOMSEQ'), p[3], 'ATOMSEQ')
 
 def p_proxy_proxy(p):
   'atomproxy : OBR atomproxy2 CBR'
