@@ -37,9 +37,10 @@ class PrologParser(TextParsers, whitespace=r'[ \t\n\r]*'):
 
     l_atm1 = lambda x: ''.join(list(map(lambda y: str(y) if y != [] else '', x)))
     l_atm2 = lambda x: '(ATOM ' + ''.join(list(map(lambda y: str(y) if y != [] else '', x))) + ')'
-    l_atm3 = lambda x: '(' + ''.join(list(map(lambda y: str(y) if y != [] else '', x))) + ')'
-    atom = (identif & (rep(atom_proxy| atom_proxy2) > l_atm1)) > l_atm2
-    atom_proxy = (atom | obr & atom_proxy & cbr) > l_atm1
+    l_atm3 = lambda x: ''.join(list(map(lambda y: str(y) if y != [] else '', x)))
+
+    atom = (identif & (rep(((obr & atom_proxy & cbr) > (lambda x: x[1])) | atom_proxy2) > l_atm1)) > l_atm2
+    atom_proxy = ((atom > (lambda x: '(' + x + ')')) | obr & (atom_proxy | var) & cbr) > l_atm1
     atom_proxy2 = (atom | (var | identif | list_comb) & (rep(atom_proxy2) > l_atm1)) > l_atm3
 
     type_seq = rep1sep(type_comb, arrow) > (lambda x: '(TYPESEQ ' + ''.join(x) + ')')
@@ -65,6 +66,7 @@ class PrologParser(TextParsers, whitespace=r'[ \t\n\r]*'):
 
 
 if __name__ == '__main__':
+    #print(PrologParser.atom.parse('a ((A)) b'))
     sys.stdout = open(sys.argv[1] + '.out', 'w')
     with open(sys.argv[1], 'r') as inf:
         result = PrologParser.program.parse(inf.read())

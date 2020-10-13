@@ -31,16 +31,17 @@ def test_atom():
     assert type(parse_fn('a (b C) d E f')) == Success
     assert type(parse_fn('a (b C) (((d E))) f')) == Success
     assert type(parse_fn('a (b (c))')) == Success
+    assert type(parse_fn('a ((A)) b')) == Success
 
     assert type(parse_fn('type b')) == Failure
     assert type(parse_fn('a module')) == Failure
     assert type(parse_fn('A b')) == Failure
     assert type(parse_fn('A B')) == Failure
-    assert type(parse_fn('a (B c)')) == Failure
     assert type(parse_fn('a ((b) c)')) == Failure
     assert type(parse_fn('a (((b c))')) == Failure
     assert type(parse_fn('a (((b (((c)) d e f))))')) == Failure
     assert type(parse_fn('a b ()')) == Failure
+    assert type(parse_fn('a (B c)')) == Failure
 
 
 def test_type_dec():
@@ -134,6 +135,54 @@ def test_file(file_name, res):
         assert type(PrologParser.program.parse(inf.read())) == res
 
 
+def outer_tests():
+    assert type(PrologParser.identif.parse("abc")) == Success
+    assert type(PrologParser.identif.parse("aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPrRsStTuUvVwWxXyYzZ_1234567890")) == Success
+
+    assert type(PrologParser.identif.parse("123abc")) == Failure
+    assert type(PrologParser.identif.parse("Xyz")) == Failure
+
+    assert type(PrologParser.var.parse("Abc")) == Success
+    assert type(PrologParser.var.parse("H")) == Success
+
+    assert type(PrologParser.var.parse("123abc")) == Failure
+    assert type(PrologParser.var.parse("xyz")) == Failure
+
+    assert type(PrologParser.atom.parse("a")) == Success
+    assert type(PrologParser.atom.parse("a b c")) == Success
+    assert type(PrologParser.atom.parse("a (b c)")) == Success
+    assert type(PrologParser.atom.parse("a ((b c))")) == Success
+    assert type(PrologParser.atom.parse("a ((b c)) d")) == Success
+    assert type(PrologParser.atom.parse("a ((b c))  (d)")) == Success
+    assert type(PrologParser.atom.parse("a ((b  c))  (d)")) == Success
+    assert type(PrologParser.atom.parse("a ((b  c) )  ( d )")) == Success
+    assert type(PrologParser.atom.parse("a((b c))(d)")) == Success
+
+    assert type(PrologParser.atom.parse("a (a")) == Failure
+    assert type(PrologParser.atom.parse("X a")) == Failure
+    assert type(PrologParser.atom.parse("(a)")) == Failure
+
+    assert type(PrologParser.rel_decl.parse("a.")) == Success
+    assert type(PrologParser.rel_decl.parse("a b.")) == Success
+    assert type(PrologParser.rel_decl.parse("a:-a.")) == Success
+    assert type(PrologParser.rel_decl.parse("a:-a b.")) == Success
+    assert type(PrologParser.rel_decl.parse("a b:- (a b)  .")) == Success
+    assert type(PrologParser.rel_decl.parse("a b:- a;b,c.")) == Success
+    assert type(PrologParser.rel_decl.parse("a b:- a;(b,c).")) == Success
+    assert type(PrologParser.rel_decl.parse("a b:- (a;b),c.")) == Success
+    assert type(PrologParser.rel_decl.parse("a b:- a;b;c.")) == Success
+    assert type(PrologParser.rel_decl.parse("a b:- a,b,c.")) == Success
+    assert type(PrologParser.rel_decl.parse("a (b (c))  :- (a b) .")) == Success
+
+    assert type(PrologParser.type_seq.parse("a")) == Success
+    assert type(PrologParser.type_seq.parse("Y -> X")) == Success
+
+    assert type(PrologParser.type_decl.parse("type a b.")) == Success
+    assert type(PrologParser.type_decl.parse("type a b -> X.")) == Success
+    assert type(PrologParser.type_decl.parse("type filter (A -> o) -> list a -> list a -> o.")) == Success
+    assert type(PrologParser.type_decl.parse("type filter (A -> o) -> list A -> list A -> o.")) == Success
+
+
 if __name__ == '__main__':
     test_module_dec()
     test_atom()
@@ -144,5 +193,5 @@ if __name__ == '__main__':
     test_file('../prolog/test.plg', Success)
     test_file('../prolog/auto.plg', Success)
     test_file('../prolog/test2.plg', Success)
-
+    outer_tests()
     print('All tests passed')
