@@ -11,7 +11,7 @@ pip install parsita
 ## Использование
 Построить AST по файлу (пишет в выходной файл ошибку в случае неудачи) 
 ```buildoutcfg
-python parse_comb/combinators.py <file name>
+python parse_comb/combinators.py <parser> <file name>
 ```
 Запуск тестов
 ```buildoutcfg
