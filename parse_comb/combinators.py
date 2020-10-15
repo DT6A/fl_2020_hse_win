@@ -66,10 +66,18 @@ class PrologParser(TextParsers, whitespace=r'[ \t\n\r]*'):
 
 
 if __name__ == '__main__':
-    #print(PrologParser.atom.parse('a ((A)) b'))
-    sys.stdout = open(sys.argv[1] + '.out', 'w')
-    with open(sys.argv[1], 'r') as inf:
-        result = PrologParser.program.parse(inf.read())
+    s2p = {
+        '--atom': PrologParser.atom.parse,
+        '--typeexpr': PrologParser.type_seq.parse,
+        '--type': PrologParser.type_decl.parse,
+        '--module': PrologParser.module_decl.parse,
+        '--relation': PrologParser.rel_decl.parse,
+        '--list': PrologParser.list_comb.parse,
+        '--prog': PrologParser.program.parse,
+    }
+    sys.stdout = open(sys.argv[2] + '.out', 'w')
+    with open(sys.argv[2], 'r') as inf:
+        result = s2p[sys.argv[1]](inf.read())
         if type(result) == Success:
             print(result.value)
         else:
