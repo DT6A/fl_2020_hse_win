@@ -43,8 +43,9 @@ class PrologParser(TextParsers, whitespace=r'[ \t\n\r]*'):
     atom_proxy = ((atom > (lambda x: '(' + x + ')')) | obr & (atom_proxy | var) & cbr) > l_atm1
     atom_proxy2 = (atom | (var | identif | list_comb) & (rep(atom_proxy2) > l_atm1)) > l_atm3
 
-    type_seq = rep1sep(type_comb, arrow) > (lambda x: '(TYPESEQ ' + ''.join(x) + ')')
-    type_comb = atom | var | obr & type_seq & cbr > (lambda x: ''.join(x))
+    type_seq = rep1sep(type_comb, arrow) > (lambda x: '(TYPESEQ ' + ''.join(x) + ')' if len(x) > 1 else ''.join(x))
+    type_comb = (atom | var | (((obr & type_br & cbr) & arrow & type_seq) > (lambda x: '(TYPESEQ ' + ''.join(x) + ')')) | ((obr & type_br) > (lambda x: ''.join(x))) & cbr) > (lambda x: ''.join(x))
+    type_br = (type_seq) | obr & type_br & cbr
     #type_comb2 = ((atom | var | obr & type_seq & cbr) & arrow & type_seq) > (lambda x: '(TYPESEQ ' + ''.join(x) + ')')
 
     l_list = (lambda x: foldl(lambda y, z: '(cons ' + y + ' ' + z + ')', x, 'nil'))
