@@ -51,7 +51,8 @@ class PrologParser(TextParsers, whitespace=r'[ \t\n\r]*'):
     l_short_list = (lambda x: '(cons (' + x[0] + ')' + x[2] + ')')
     l_compl_list = (lambda x: process_list(x[0], x[2]))
     list_coma = repsep(atom | var | list_comb, list_sep) > l_list
-    list_comb = (lob & ((((atom | var | list_comb) & list_ht & var) > l_short_list) | ((list_coma & list_ht & var)  > l_compl_list) | list_coma) & lcb) > l_atm1
+    list_coma1 = rep1sep(atom | var | list_comb, list_sep) > l_list
+    list_comb = (lob & ((((atom | var | list_comb) & list_ht & var) > l_short_list) | ((list_coma1 & list_ht & var)  > l_compl_list) | list_coma) & lcb) > l_atm1
 
     expr = (obr & disj & cbr | atom) > (lambda x: ''.join(x))
     conj = ((expr & conj_s & conj > (lambda x: '(AND ' + ''.join(x) + ')'))  | expr)

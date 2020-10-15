@@ -42,7 +42,7 @@ def test_atom():
     assert type(parse_fn('a (((b (((c)) d e f))))')) == Failure
     assert type(parse_fn('a b ()')) == Failure
     assert type(parse_fn('a (B c)')) == Failure
-
+    assert type(parse_fn('a ((A) b)')) == Failure
 
 def test_type_dec():
     parse_fn = PrologParser.type_decl.parse
@@ -81,12 +81,14 @@ def test_lists():
     assert type(parse_fn('[a, b, Z, [x, y | Z], [X, [H | T]], x | Z]')) == Success
     assert type(parse_fn2('g [X] Y')) == Success
 
+
     assert type(parse_fn('[')) == Failure
     assert type(parse_fn(']a, b, c[')) == Failure
     assert type(parse_fn('[H | abc]')) == Failure
     assert type(parse_fn('[H | A b c]')) == Failure
     assert type(parse_fn2('[X] Y')) == Failure
-
+    assert type(parse_fn('[X, Y, Z, ]')) == Failure
+    assert type(parse_fn('[| Z]')) == Failure
 
 def test_rel():
     parse_fn = PrologParser.rel_decl.parse
